@@ -39,42 +39,26 @@
     ...
     `
    - Ejemplo:
-    `
-    File 16472 -
+    ```
+    File 16472 -    
+    Could 0-5 O    
+    I 6-7 O    
+    have 8-12 O    
+    reflux 13-19 B-finding    
+    ? 20-21 O    
     
-    Could 0-5 O
-    
-    I 6-7 O
-    
-    have 8-12 O
-    
-    reflux 13-19 B-finding
-    
-    ? 20-21 O
-    
-    
-    File 18659 -
-    
-    I 0-1 O
-    
-    also 2-6 O
-    
-    have 7-11 O
-    
-    a 12-13 O
-    
-    temperature 14-25 O
-    
-    and 26-29 O
-    
-    my 30-32 O
-    
+    File 18659 -    
+    I 0-1 O    
+    also 2-6 O    
+    have 7-11 O    
+    a 12-13 O    
+    temperature 14-25 O    
+    and 26-29 O    
+    my 30-32 O    
     throat 33-39 B-finding
-    
     hurts 40-45 I-finding
-    
     . 46-47 O
-    `
+    ```
 * output_conll: path al fichero conll con los datos aumentados (mismo formato que el input_conll)
 
  
