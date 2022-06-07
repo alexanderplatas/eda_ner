@@ -1,11 +1,6 @@
-# Easy data augmentation techniques for text classification
-# Jason Wei and Kai Zou
-
-# cleaning up text
-import re
+# Easy data augmentation techniques for NER tasks
 
 import random
-from random import shuffle
 
 random.seed(1)
 
@@ -107,6 +102,9 @@ def synonym_replacement(conll, n):
 
 def get_synonyms(word):
 
+    if len(word) < 2:
+        return []
+
     synonyms = set()
 
     # For each synonym
@@ -131,6 +129,7 @@ def get_synonyms(word):
 ########################################################################
 
 def random_deletion(conll, p):
+
     # Get list of lines with no empty lines
     lines_list = list(filter(None, conll.split('\n')))
 
@@ -171,7 +170,9 @@ def random_deletion(conll, p):
 ########################################################################
 
 def random_swap(conll, n):
-    if len(conll.split('\n')) > 3:
+
+    # Swap if sentence has more than 1 word
+    if len(list(filter(None, conll.split('\n')))) > 2:
 
         new_file_name = conll.split('\n')[0].split(' ')[1] + '_RS'
 
@@ -182,6 +183,7 @@ def random_swap(conll, n):
 
 
 def swap_word(conll, new_file_name):
+
     # Get list of lines with no empty lines
     lines_list = list(filter(None, conll.split('\n')))
 
@@ -229,6 +231,7 @@ def swap_word(conll, new_file_name):
 ########################################################################
 
 def random_insertion(conll, n):
+
     new_file_name = conll.split('\n')[0].split(' ')[1] + '_RI'
 
     for _ in range(n):
@@ -238,6 +241,7 @@ def random_insertion(conll, n):
 
 
 def add_word(conll, new_file_name):
+
     # Get list of lines with no empty lines
     lines_list = list(filter(None, conll.split('\n')))
 

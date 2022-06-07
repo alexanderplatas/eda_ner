@@ -33,3 +33,64 @@ Could 0-5 O
 have 6-10 O
 reflux 11-17 B-finding
 ? 18-19 O
+
+File 18659 -
+I 0-1 O
+also 2-6 O
+have 7-11 O
+a 12-13 O
+temperature 14-25 O
+and 26-29 O
+my 30-32 O
+throat 33-39 B-finding
+hurts 40-45 I-finding
+. 46-47 O
+
+File 18659_SR -
+I 0-1 O
+also 2-6 O
+have 7-11 O
+a 12-13 O
+temperature 14-25 O
+and 26-29 O
+my 30-32 O
+pharynx 33-40 B-finding
+hurts 41-46 I-finding
+. 47-48 O
+
+File 18659_RI -
+ache 0-4 I-finding
+I 5-6 O
+also 7-11 O
+have 12-16 O
+a 17-18 O
+temperature 19-30 O
+and 31-34 O
+my 35-37 O
+throat 38-44 B-finding
+hurts 45-50 I-finding
+. 51-52 O
+
+File 18659_RS -
+I 0-1 O
+also 2-6 O
+have 7-11 O
+my 12-14 O
+temperature 15-26 O
+and 27-30 O
+a 31-32 O
+throat 33-39 B-finding
+hurts 40-45 I-finding
+. 46-47 O
+
+File 18659_RD -
+I 0-1 O
+also 2-6 O
+have 7-11 O
+a 12-13 O
+temperature 14-25 O
+and 26-29 O
+my 30-32 O
+throat 33-39 B-finding
+hurts 40-45 I-finding
+. 46-47 O
