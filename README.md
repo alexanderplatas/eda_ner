@@ -40,7 +40,7 @@
     
     File [FileName2] -
     ```
-   - Ejemplo:
+ - Ejemplo:
     ```
     File 16472 -    
     Could 0-5 O    
