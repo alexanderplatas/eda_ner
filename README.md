@@ -33,11 +33,13 @@
 * n_aug - Número de frases nuevas a generar por frase original
 * input_conll: path al fichero conll con los datos a aumentar
   - Formato:
-    `
+    ```
     File [FileName] -
     [word] [InitOffset]-[EndOffset] [tag]-[class]
     ...
-    `
+    
+    File [FileName2] -
+    ```
    - Ejemplo:
     ```
     File 16472 -    
