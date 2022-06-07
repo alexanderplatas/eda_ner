@@ -1,0 +1,35 @@
+
+File 16472 -
+Could 0-5 O
+I 6-7 O
+have 8-12 O
+reflux 13-19 B-finding
+? 20-21 O
+
+File 16472_SR -
+Could 0-5 O
+I 6-7 O
+have 8-12 O
+ebb 13-16 B-finding
+? 17-18 O
+
+File 16472_RI -
+Could 0-5 O
+I 6-7 O
+have 8-12 O
+ebb 13-16 B-finding
+reflux 17-23 B-finding
+? 24-25 O
+
+File 16472_RS -
+Could 0-5 O
+reflux 6-12 B-finding
+have 13-17 O
+I 18-19 O
+? 20-21 O
+
+File 16472_RD -
+Could 0-5 O
+have 6-10 O
+reflux 11-17 B-finding
+? 18-19 O
