@@ -76,7 +76,7 @@ def synonym_replacement(conll, n):
                         new_conll += f'{word} {offset}-{offset + len(word)} {line.split(" ")[2]}\n'
                         offset += len(word) + 1
 
-                        print(f"** Replaced {random_line.split(' ')[0]} with {synonym}")
+                        # print(f"** Replaced {random_line.split(' ')[0]} with {synonym}")
 
                     num_replaced += 1
 
@@ -148,8 +148,8 @@ def random_deletion(conll, p):
             new_conll += f'{word} {offset}-{offset + len(word)} {line.split(" ")[2]}\n'
             offset += len(word) + 1
 
-        else:
-            print(f'** Deleted: {line.split(" ")[0]}')
+        # else:
+            # print(f'** Deleted: {line.split(" ")[0]}')
 
     # if you end up deleting all words, just return a random word
     if new_conll.split('\n')[1] == '':
@@ -220,7 +220,7 @@ def swap_word(conll, new_file_name):
             new_conll += f'{word} {offset}-{offset + len(word)} {tag}\n'
             offset += len(word) + 1
 
-    print(f'** Swapped: {lines_list[random_idx_1].split(" ")[0]} <--> {lines_list[random_idx_2].split(" ")[0]}')
+    # print(f'** Swapped: {lines_list[random_idx_1].split(" ")[0]} <--> {lines_list[random_idx_2].split(" ")[0]}')
 
     return new_conll
 
@@ -291,7 +291,7 @@ def add_word(conll, new_file_name):
                 new_conll += f'{word} {offset}-{offset + len(word)} {synonym_tag}\n'
                 offset += len(word) + 1
 
-            print(f'** Inserted: {random_synonym} (synonym of {random_word})')
+            # print(f'** Inserted: {random_synonym} (synonym of {random_word})')
 
         word = line.split(" ")[0]
         new_conll += f'{word} {offset}-{offset + len(word)} {line.split(" ")[2]}\n'
@@ -304,7 +304,7 @@ def add_word(conll, new_file_name):
 # main data augmentation function
 ########################################################################
 
-def eda(conll, alpha_sr=0.1, alpha_ri=0.1, alpha_rs=0.1, alpha_rd=0.1, num_aug=9):
+def eda(conll, alpha_sr=0.1, alpha_ri=0.1, alpha_rs=0.1, alpha_rd=0.1, num_aug=3):
 
     num_words = len(conll.split('\n'))
 
