@@ -1,9 +1,10 @@
 {
   "input_conll": "data/train_chv.conll",
   "output_conll": "data/generated_chv.conll",
-  "alpha_sr": 0.1,
-  "alpha_ri": 0.1,
-  "alpha_rs": 0.1,
+  "alpha_sr": 0.0,
+  "alpha_ri": 0.0,
+  "alpha_rs": 0.0,
   "alpha_rd": 0.05,
-  "num_augmented_sentences": 4
+  "num_augmented_sentences": 4,
+  "language": "spanish"
 }
