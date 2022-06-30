@@ -1,31 +1,26 @@
 # Easy data augmentation techniques for NER tasks
-
+import json
 import random
 
 random.seed(1)
 
-# stop words list
-stop_words = ['i', 'me', 'my', 'myself', 'we', 'our',
-              'ours', 'ourselves', 'you', 'your', 'yours',
-              'yourself', 'yourselves', 'he', 'him', 'his',
-              'himself', 'she', 'her', 'hers', 'herself',
-              'it', 'its', 'itself', 'they', 'them', 'their',
-              'theirs', 'themselves', 'what', 'which', 'who',
-              'whom', 'this', 'that', 'these', 'those', 'am',
-              'is', 'are', 'was', 'were', 'be', 'been', 'being',
-              'have', 'has', 'had', 'having', 'do', 'does', 'did',
-              'doing', 'a', 'an', 'the', 'and', 'but', 'if', 'or',
-              'because', 'as', 'until', 'while', 'of', 'at',
-              'by', 'for', 'with', 'about', 'against', 'between',
-              'into', 'through', 'during', 'before', 'after',
-              'above', 'below', 'to', 'from', 'up', 'down', 'in',
-              'out', 'on', 'off', 'over', 'under', 'again',
-              'further', 'then', 'once', 'here', 'there', 'when',
-              'where', 'why', 'how', 'all', 'any', 'both', 'each',
-              'few', 'more', 'most', 'other', 'some', 'such', 'no',
-              'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too',
-              'very', 's', 't', 'can', 'will', 'just', 'don',
-              'should', 'now', '']
+# Load language parameter
+with open("eda_params.json", "r", encoding="utf8") as file_params:
+    language = json.load(file_params)['language']
+
+# Load all resources
+with open("resources.json", "r", encoding="utf8") as file_resources:
+    resources = json.load(file_resources)
+
+# Check selected language
+if language not in resources:
+    print(' ** Language not available')
+    exit(-1)
+
+# Load language resources
+lang = resources[language]['abbreviation']
+stop_words = resources[language]['stopwords']
+characters = resources[language]['characters']
 
 
 ########################################################################
@@ -54,66 +49,66 @@ def synonym_replacement(conll, n):
     num_replaced = 0
     for random_line in random_lines_list:
 
-        synonyms = get_synonyms(random_line.split(' ')[0])
+        if 'B-' not in random_line and 'I-' not in random_line:
 
-        # If it has synonyms
-        if len(synonyms) >= 1:
+            synonyms = get_synonyms(random_line.split(' ')[0])
 
-            # Choose random synonym
-            synonym = random.choice(list(synonyms))
+            # If it has synonyms
+            if len(synonyms) >= 1:
 
-            new_conll = ''
-            offset = 0
+                # Choose random synonym
+                synonym = random.choice(list(synonyms))
 
-            # Replace
-            for line in conll.split('\n'):
+                new_conll = ''
+                offset = 0
 
-                # Replace word with its synonym
-                if line == random_line:
+                # Replace
+                for line in conll.split('\n'):
 
-                    # If synonym has more than 1 word
-                    for word in synonym.split(' '):
-                        new_conll += f'{word} {offset}-{offset + len(word)} {line.split(" ")[2]}\n'
-                        offset += len(word) + 1
+                    # Replace word with its synonym
+                    if line == random_line:
 
-                        # print(f"** Replaced {random_line.split(' ')[0]} with {synonym}")
+                        # If synonym has more than 1 word
+                        for word in synonym.split(' '):
+                            new_conll += f'{word} {offset}-{offset + len(word)} {line.split(" ")[2]}\n'
+                            offset += len(word) + 1
 
-                    num_replaced += 1
+                            # print(f"** Replaced {random_line.split(' ')[0]} with {synonym}")
 
-                elif line != '':
+                        num_replaced += 1
 
-                    word = line.split(' ')[0]
+                    elif line != '':
 
-                    # If line is the header
-                    if line.split(' ')[2] == '-':
-                        new_conll += f'{word} {new_file_name} {line.split(" ")[2]}\n'
+                        word = line.split(' ')[0]
 
-                    else:
-                        new_conll += f'{word} {offset}-{offset + len(word)} {line.split(" ")[2]}\n'
-                        offset += len(word) + 1
+                        # If line is the header
+                        if line.split(' ')[2] == '-':
+                            new_conll += f'{word} {new_file_name} {line.split(" ")[2]}\n'
 
-            conll = new_conll
+                        else:
+                            new_conll += f'{word} {offset}-{offset + len(word)} {line.split(" ")[2]}\n'
+                            offset += len(word) + 1
 
-        # Only replace up to n words
-        if num_replaced >= n: break
+                conll = new_conll
+
+            # Only replace up to n words
+            if num_replaced >= n: break
 
     return conll
 
 
 def get_synonyms(word):
-
     if len(word) < 2:
         return []
 
     synonyms = set()
 
     # For each synonym
-    for syn in wordnet.synsets(word):
-        for l in syn.lemmas():
-
+    for syn in wordnet.synsets(word, lang=lang):
+        for lemma in syn.lemma_names(lang):
             # Add name to synonyms list
-            synonym = l.name().replace("_", " ").replace("-", " ").lower()
-            synonym = "".join([char for char in synonym if char in ' qwertyuiopasdfghjklzxcvbnm1234567890'])
+            synonym = lemma.replace("_", " ").replace("-", " ").lower()
+            synonym = "".join([char for char in synonym if char in characters])
             synonyms.add(synonym)
 
     # Remove word from synonyms
@@ -129,7 +124,6 @@ def get_synonyms(word):
 ########################################################################
 
 def random_deletion(conll, p):
-
     # Get list of lines with no empty lines
     lines_list = list(filter(None, conll.split('\n')))
 
@@ -141,7 +135,8 @@ def random_deletion(conll, p):
     # Start deleting lines with probability p
     for line in lines_list[1:]:
 
-        if random.uniform(0, 1) > p and line != '\n' and line != '':
+        # If line has an entity do not delete
+        if 'B-' in line or 'I-' in line or (random.uniform(0, 1) > p and line != '\n' and line != ''):
 
             # Adjust offset
             word = line.split(" ")[0]
@@ -149,7 +144,7 @@ def random_deletion(conll, p):
             offset += len(word) + 1
 
         # else:
-            # print(f'** Deleted: {line.split(" ")[0]}')
+        # print(f'** Deleted: {line.split(" ")[0]}')
 
     # if you end up deleting all words, just return a random word
     if new_conll.split('\n')[1] == '':
@@ -170,9 +165,8 @@ def random_deletion(conll, p):
 ########################################################################
 
 def random_swap(conll, n):
-
-    # Swap if sentence has more than 1 word
-    if len(list(filter(None, conll.split('\n')))) > 2:
+    # Swap if sentence has more than 1 word that is not an entity
+    if len(list(filter(None, [line for line in conll.split('\n') if 'B-' not in line and 'I-' not in line]))) > 2:
 
         new_file_name = conll.split('\n')[0].split(' ')[1] + '_RS'
 
@@ -187,12 +181,18 @@ def swap_word(conll, new_file_name):
     # Get list of lines with no empty lines
     lines_list = list(filter(None, conll.split('\n')))
 
-    # Get random index 1
+    # Save entities indexes
+    entities_index = [i for i, line in enumerate(lines_list) if 'B-' in line or 'I-' in line]
+
+    # Get random index 1 (with no entity)
     random_idx_1 = random.randint(1, len(lines_list) - 1)
+    while random_idx_1 in entities_index:
+        random_idx_1 = random.randint(1, len(lines_list) - 1)
     random_idx_2 = random_idx_1
 
-    # Get random index 2
-    while random_idx_1 == random_idx_2: random_idx_2 = random.randint(1, len(lines_list) - 1)
+    # Get random index 2 (with no entity)
+    while random_idx_1 == random_idx_2 or random_idx_2 in entities_index:
+        random_idx_2 = random.randint(1, len(lines_list) - 1)
 
     # Write file header
     new_conll = lines_list[0].split(" ")[0] + f' {new_file_name} -\n'
@@ -231,7 +231,6 @@ def swap_word(conll, new_file_name):
 ########################################################################
 
 def random_insertion(conll, n):
-
     new_file_name = conll.split('\n')[0].split(' ')[1] + '_RI'
 
     for _ in range(n):
@@ -249,8 +248,10 @@ def add_word(conll, new_file_name):
     new_conll = lines_list[0].split(" ")[0] + f' {new_file_name} -\n'
 
     synonyms = []
-    random_word = ''
     synonym_tag = ''
+
+    # Save entities indexes
+    entities_index = [i for i, line in enumerate(lines_list) if 'B-' in line or 'I-' in line]
 
     # 10 attempts to find a word with synonyms
     counter = 9
@@ -258,7 +259,10 @@ def add_word(conll, new_file_name):
     # Find a synonym of a random word
     while len(synonyms) < 1:
 
+        # Get random index (with no entity)
         random_index = random.randint(1, len(lines_list) - 1)
+        while random_index in entities_index:
+            random_index = random.randint(1, len(lines_list) - 1)
 
         # Get random word from file
         random_word = lines_list[random_index].split(' ')[0]
@@ -276,8 +280,13 @@ def add_word(conll, new_file_name):
     # Get a random synonym
     random_synonym = synonyms[0]
 
-    # Get a random index
-    random_idx = random.randint(0, len(lines_list) - 1)
+    # Save 'I' entities indexes in order to not break entities
+    entities_index = [i-1 for i, line in enumerate(lines_list) if 'I-' in line]
+
+    # Get a random index (with no 'I' entity)
+    random_idx = random.randint(1, len(lines_list) - 1)
+    while random_idx in entities_index:
+        random_idx = random.randint(0, len(lines_list) - 1)
 
     offset = 0
 
