@@ -23,6 +23,14 @@
 * Random Deletion (RD):
   1. Eliminar cada palabra con probabilidad p (p = α)
 
+
+Estas técnicas mantienen las entidades intactas, es decir:
+* Las entidades NO se reemplazan por sinónimos en SR.
+* Las entidades NO se insertan en otras zonas del texto en RI.
+* Las entidades compuestas por más de un token NO se dividen (no se insertan palabras en medio) en RI.
+* Las entidades NO son eliminadas en RD.
+* Las entidades NO se intercambian de posición en RS.
+
 ---
 
 ### Parámetros (eda_params.json):
@@ -63,5 +71,14 @@
       . 46-47 O
       ```
 * output_conll: path al fichero conll con los datos aumentados (mismo formato que el input_conll)
+* language: lenguaje del corpus a aumentar ("spanish" o "english")
 
+ ---
  
+ ### Recursos (resources.json):
+ 
+ Contiene los recursos del idioma del corpus a aumentar (solo se han añadido inglés y español)
+ 
+ * stopswords: Las stopwords del idioma que NO se desean reemplazar ni insertar.
+ * characters: Los caracteres que contienen las palabras del idioma.
+ * abbreviation: Abreviación del nombre del idioma en wordnet (3 letras).
