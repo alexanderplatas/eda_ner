@@ -1,0 +1,32 @@
+{
+  "english": {
+    "stopwords": ["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself",
+                 "yourselves", "he", "him", "his", "himself", "she", "her", "hers", "herself", "it", "its", "itself",
+                 "they", "them", "their", "theirs", "themselves", "what", "which", "who", "whom", "this", "that",
+                 "these", "those", "am", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had",
+                 "having", "do", "does", "did", "doing", "a", "an", "the", "and", "but", "if", "or", "because", "as",
+                 "until", "while", "of", "at", "by", "for", "with", "about", "against", "between", "into", "through",
+                 "during", "before", "after", "above", "below", "to", "from", "up", "down", "in", "out", "on", "off",
+                 "over", "under", "again", "further", "then", "once", "here", "there", "when", "where", "why", "how",
+                 "all", "any", "both", "each", "few", "more", "most", "other", "some", "such", "no", "nor", "not",
+                 "only", "own", "same", "so", "than", "too", "very", "s", "t", "can", "will", "just", "don", "should",
+                 "now", ""],
+    "characters": " qwertyuiopasdfghjklzxcvbnm1234567890",
+    "abbreviation": "eng"
+  },
+  "spanish": {
+    "stopwords": ["a", "acá", "ahí", "al", "algo", "algún", "alguna", "alguno", "algunas", "algunos", "allá", "allí",
+                 "ambos", "ante", "antes", "aquel", "aquella", "aquellas", "aquello", "aquellos", "aquí", "arriba",
+                 "así", "atrás", "aun", "aunque", "bien", "cada", "casi", "como", "con", "cual", "cuales", "cualquier",
+                 "cualquiera", "cuan", "cuando", "cuanto", "cuanta", "cuantos", "cuantas", "de", "del", "demás",
+                 "desde", "donde", "dos", "el", "él", "ella", "ellos", "ellas", "en", "eres", "esa", "ese", "esas",
+                 "esos", "esta", "estas", "este", "esto", "estos", "etc", "ha", "hasta", "la", "lo", "las", "los", "me",
+                 "mi", "mí", "mis", "mía", "mío", "mías", "míos", "mientras", "muy", "ni", "nosotras", "nosotros",
+                 "nuestra", "nuestro", "nuestras", "nuestros", "os", "otra", "otras", "otros", "otras", "para", "pero",
+                 "pues", "que", "qué", "si", "sí", "siempre", "siendo", "sin", "sino", "so", "sobre", "sr", "sra",
+                 "sres", "sta", "su", "sus", "te", "tu", "tú", "tus", "un", "una", "uno", "unos", "unas", "usted",
+                 "ustedes", "vosotras", "vosotros", "vuestra", "vuestro", "vuestras", "vuestros", "y", "ya", "yo"],
+    "characters": " qweértyuúüiíïoópaásdfghjklzxcvbnñm1234567890",
+    "abbreviation": "spa"
+  }
+}
