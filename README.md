@@ -38,7 +38,7 @@ Estas técnicas mantienen las entidades intactas, es decir:
 * α - Porcentaje de parabras a cambiar por frase.
   * Cada una de las 4 técnicas tiene su propio α (alpha_sr, alpha_ri, alpha_rs, alpha_rd)
   * Para α = 0, esa técnica no se aplica
-* n_aug - Número de frases nuevas a generar por frase original
+* n_aug - Número de frases nuevas a generar por frase original (ha de ser múltiplo del número de técnicas a utilizar)
 * input_conll: path al fichero conll con los datos a aumentar
   - Formato:
     ```
